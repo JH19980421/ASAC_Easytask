@@ -2,10 +2,7 @@ package co.kr.easytask.review.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -37,6 +34,17 @@ public class Task {
     @Column(name = "task_program")
     private String program;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "task_status")
     private TaskStatus taskStatus;
+
+    public Task(String name, String category, String categoryDetail, String ability, String program) {
+        this.name = name;
+        this.category = category;
+        this.ability = ability;
+        this.program = program;
+        this.taskStatus = TaskStatus.ACTIVE;
+    }
+
+
 }

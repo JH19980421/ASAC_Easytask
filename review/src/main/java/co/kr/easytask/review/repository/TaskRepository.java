@@ -26,4 +26,5 @@ public class TaskRepository {
         return entityManager.createQuery("select t from Task t where t.user_id = :user_id", Task.class)
                 .setParameter("user_id", userId).getResultList();
     }
+
 }

@@ -20,5 +20,7 @@ public class Erumy {
     @Column(name = "erumy_name")
     private String name;
 
-
+    public Erumy(String name) {
+        this.name = name;
+    }
 }
