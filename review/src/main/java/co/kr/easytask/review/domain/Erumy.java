@@ -2,11 +2,7 @@ package co.kr.easytask.review.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -20,7 +16,10 @@ public class Erumy {
     @Column(name = "erumy_name")
     private String name;
 
+
     public Erumy(String name) {
         this.name = name;
     }
+
+
 }

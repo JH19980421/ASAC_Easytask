@@ -2,10 +2,8 @@ package co.kr.easytask.review.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +20,9 @@ public class User {
 
     @Column(name = "user_phone")
     private String phone;
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<>();
 
     public User (String name, String phone) {
         this.name = name;

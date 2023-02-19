@@ -16,8 +16,9 @@ public class TaskService {
     private final TaskRepository taskRepository;
 
     @Transactional
-    public void saveTask(Task task) {
+    public Long createTask(Task task) {
         taskRepository.save(task);
+        return task.getId();
     }
 
     public List<Task> findTasksByUserId(Long userId) {
@@ -26,5 +27,15 @@ public class TaskService {
 
     public Task findOne(Long taskId) {
         return taskRepository.findOne(taskId);
+    }
+
+    public void cancelTask(Long taskId) {
+        Task task = taskRepository.findOne(taskId);
+        task.cancel();
+    }
+
+    public void doneTask(Long taskId) {
+        Task task = taskRepository.findOne(taskId);
+        task.done();
     }
 }

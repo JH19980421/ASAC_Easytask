@@ -13,14 +13,13 @@ public class Review {
     @Column(name = "review_id")
     private Long id;
 
-    @Column(name = "review_user")
-    private Long userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "erumy_id")
+    private Erumy erumy;
 
-    @Column(name = "review_erumy")
-    private Long erumyId;
-
-    @Column(name = "review_task")
-    private Long taskId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private Task task;
 
     @Column(name = "review_text")
     private String text;
@@ -34,23 +33,37 @@ public class Review {
     @Column(name = "review_individual")
     private int individual;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "review_recommend")
-    private String recommend;
+    private ReviewStatus recommend;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "review_status")
     private ReviewStatus status;
 
-    public Review(Long userId, Long erumyId, Long taskId, String text, int ability, int program, int individual) {
-        this.userId = userId;
-        this.erumyId = erumyId;
-        this.taskId = taskId;
+    public Review(String text, int ability, int program, int individual) {
         this.text = text;
         this.ability = ability;
         this.program = program;
         this.individual = individual;
-        this.recommend = null;
+        this.recommend = ReviewStatus.DEPRECATED;
         this.status = ReviewStatus.ACTIVE;
+    }
+
+    public void setErumy(Erumy erumy) {
+        this.erumy = erumy;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public void recommendReview() {
+        this.recommend = ReviewStatus.RECOMMEND;
+    }
+
+    public void delete() {
+        this.status = ReviewStatus.INACTIVE;
     }
 
 }
