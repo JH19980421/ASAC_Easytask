@@ -13,6 +13,7 @@ public class ErumyService {
 
     private final ErumyRepository erumyRepository;
 
+    @Transactional
     public Long createErumy(Erumy erumy) {
         erumyRepository.save(erumy);
         return erumy.getId();
@@ -21,4 +22,5 @@ public class ErumyService {
     public Erumy findOne(Long erumyId) {
         return erumyRepository.findOne(erumyId);
     }
+
 }

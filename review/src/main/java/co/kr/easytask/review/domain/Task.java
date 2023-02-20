@@ -1,11 +1,14 @@
 package co.kr.easytask.review.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Task {
 
     @Id
@@ -13,7 +16,7 @@ public class Task {
     @Column(name = "task_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -37,7 +40,7 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status", nullable = false)
-    private TaskStatus taskStatus;
+    private TaskStatus taskStatus = TaskStatus.ACTIVE;
 
     public Task(String name, String category, String categoryDetail, String ability, String abilityDetail, String program) {
         this.name = name;
@@ -46,7 +49,6 @@ public class Task {
         this.ability = ability;
         this.abilityDetail = abilityDetail;
         this.program = program;
-        this.taskStatus = TaskStatus.ACTIVE;
     }
 
     public void setUser(User user) {
